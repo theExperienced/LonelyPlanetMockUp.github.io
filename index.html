@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto+Slab|Oxygen" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<style>
+		html{
+			margin:0;
+			padding: 0;
+		}
+		body {
+			margin: 0;
+		}
+		a, a:visited, :hover, a:focus, a:hover, a:active { 
+			text-decoration: none; color:black 
+		}
+		ul {
+			list-style-type: none;
+			padding: 0;
+		}
+		.cookies {
+			height: 61px;
+			background: #494848;
+			line-height: 61px;
+			text-align: center;
+			transition: all 0.0001s ease-in;
+		}
+		.cookies.cookies-animation {
+			animation:cookies-disappear 0.5s;
+		}
+		.cookies.cookies-gone {
+			display: none;
+		}
+		.cookies-p {
+			color:white;
+			margin:0;
+			display: inline-block;
+			font-family: 'Roboto Slab', serif;
+		}
+		.remove-cookies-div {
+			margin-top: 17px;
+			margin-right: 12px;
+			float: right;
+			border: none;
+			cursor: pointer;
+			outline: none;
+			background: none;
+		}
+		.remove-cookies-div>img {
+			height: 24px;
+		}
+		.container {
+			width:86%;
+			margin: 0 auto;
+			background-color: white;
+			height: 1000px;
+		}
+		header {
+			font-family: 'Montserrat', sans-serif;
+			display: grid;
+			grid-template-columns: 6.46fr 5.5fr 1.63fr 1fr 1.3fr 0.9fr 1.62594fr;
+			border-bottom: #D0CECE 1px solid;
+			height: 133px;
+		}
+		.header-item {
+			/*border-right: 1px solid black;*/
+			line-height: 133px;
+			text-align: center;
+		}
+		.header-item.link {
+			font-size: 0.961em;
+
+		}
+		.header-item.a {
+			display: flex;
+		}
+		.header-item.a>a> {
+			display: flex;
+			align-items: center;
+		}
+		.header-item.a>a>span {
+			font-size: 1.65em;
+		}
+		.header-item>img {
+			height: 116px;
+			margin-top: 10px;	
+		}
+		.header-item.a.search>.search-item>span {
+			margin-left: 10px;
+			display: inline-block;
+			transform: translateX(0);
+			transition: color 0.2s ease-in, transform 0.5s ease-in;
+		}
+		.header-item.search>a:hover > .search-item>span {
+			color: silver;
+			transform: translateX(15px);
+		}
+		.father-menu-destinations-pop {
+			position: relative;
+		}
+		.father-menu-destinations-pop:hover >.menu-destinations-pop {
+			display: block;
+			opacity:1;
+			transform: translateY(-20px);
+		}
+		.menu-destinations-pop {
+			display: none;
+			transform: translateY(0px);
+			transition: opacity 0.4s ease-out;
+			opacity: 0.3;
+			z-index: 1;
+			box-shadow: 0 0 50px -22px black;
+			position: absolute;
+			background: white;
+			top:120px;
+			left: -60%;
+			width: 210%;
+		}
+		.menu-destinations-pop:before {
+			position: absolute;
+			content: "";
+			top: -19px;
+			left:43.6%;
+			height:0;
+			width:0;
+			border-top:solid white 0;
+			border-right:solid transparent 18px;
+			border-left:solid transparent 18px;
+			border-bottom:solid white 20px;
+
+		}
+		.menu-destinations-pop>ul {
+			margin: 0;
+		}
+		.destinations-link {
+			line-height: 32px;
+			margin:0 auto;
+			width: 80%;
+			border-bottom: 1px solid silver;
+		}
+		.destinations-link:nth-last-child(2) {
+			border:none;
+			margin-bottom: 18px;
+		}
+		.destinations-last-link {
+			width:100%;
+			line-height: 52px;
+			background: #5F9CDA;
+			color: white;
+		}
+		.destinations-last-link>a {
+			display: flex;
+			justify-content: center;
+		}
+		.signin {
+			border-radius: 20px;
+			border:1.5px #8A8787 solid;
+			padding: 8px 17px;
+			transition: all 0.182s ease-in;
+		}
+		.signin:hover {
+			border-color: #CECECE;
+			background: #F6F6F6;
+		}
+		.body {
+			margin:24px 14px;
+			font-family: 'Roboto Slab', serif;
+		}
+		.breadcrumbs {
+			margin:0;
+		}
+		/*.breadcrumbs:after {
+			clear: both;
+			content:"";
+			display: block;
+		}*/
+		.breadcrumbs>.breadcrumb-list {
+			margin:0;
+			overflow: hidden;
+		}
+		.breadcrumbs>.breadcrumb-list>li {
+			float: left;
+			margin-right: 9px;
+
+		}
+		.breadcrumbs>.breadcrumb-list>li>a {
+			background: salmon;
+			height: 34px;
+			line-height: 34px;
+			display: block;
+			position: relative;
+		}
+		.breadcrumbs>.breadcrumb-list>li>a:before {
+			content:"";
+			position: absolute;
+			left:-6%;
+			height: 0;
+			width: 0;
+			border-right: none;
+			border-left: 5px solid transparent;
+			border-top: 17px solid salmon;
+			border-bottom: 17px solid salmon;
+		}
+		.breadcrumbs>.breadcrumb-list>li>a:after {
+			content:"";
+			position: absolute;
+			left:100%;
+			height: 0;
+			width: 0;
+			border-right: none;
+			border-left: 5px solid salmon;
+			border-top: 17px solid transparent;
+			border-bottom: 17px solid transparent;
+		}
+		.breadcrumbs>.breadcrumb-list>li>a:hover {
+			background: red;
+		}
+		.breadcrumbs>.breadcrumb-list>li>a:hover >.breadcrumbs>.breadcrumb-list>li>a:before {
+			background: red;
+		}
+		.breadcrumbs>.breadcrumb-list>li>a:after:hover {
+			background: red;
+		}
+		.article {
+			width:50%;
+			margin:140px 0 0 200px;
+		}
+		.article>h1 {
+			font-size: 3.7em;
+			text-shadow: 1px 1px 5px #C2C1C1, -1px 1px 5px #C2C1C1, 1px -1px 5px #C2C1C1, -1px -1px 5px #C2C1C1;
+		}
+		.article-p {
+			position: relative;
+			max-height: 500px;
+			overflow: hidden;
+			box-shadow: inset 0 -12px 20px -20px white;
+			line-height: 1.85em;
+			margin:0 0 49px 0;
+		}
+		.article-p.article-p-expanded {
+			max-height: none;
+			margin-bottom: 102px;
+		}
+		.article-p:before {
+			content:"";
+			background:salmon;
+			position: absolute;
+			height: 60px;
+			top:440px;
+			border-bottom:1px solid black;
+			width: 100%;
+			background: linear-gradient(to bottom, transparent, white);
+		}
+		.article-p.article-p-expanded:before {
+			display: none;
+		}
+		.expand-p-button {
+			background: none;
+			border:none;
+			display: block;
+			margin:0 auto 70px auto;
+			cursor: pointer;
+			outline: none;
+
+		}
+		.expand-p-button.expand-button-gone {
+			display: none;
+		}
+		.expand-p-button>img {
+			height: 60px;
+			opacity: 0.18;
+		}
+		footer {
+			border-top: #D0CECE 1px solid;
+			font-family: 'Oxygen', sans-serif;
+		}
+		.footer-link-divs {
+			margin: 34px 0 21px 0;
+			height:400px;
+			border-bottom: #D0CECE 1px solid;
+			padding-bottom: 32px;
+		}
+		.footer-link-div {
+			width:16.666%;
+			float: left;
+		}
+		.footer-link-div>h4 {
+			font-size: 0.89281em;
+		}
+		.footer-link-div>ul>li {
+			line-height: 1.36485em;
+			font-size: 0.9em
+		}
+		.footer-link-div.subscribe>form>p, .footer-link-div.subscribe>form>label {
+			line-height: 1.36485em;
+			font-size: 0.9em;
+			color: #989797;
+		}
+
+		.footer-link-div.subscribe>form>p.terms {
+			font-size: 0.769em;
+		}
+		.footer-link-div.subscribe>form>p>a {
+			color: #989797;
+			transition: all 0.14s ease-out;
+		}
+		.footer-link-div.subscribe>form>input {
+			height: 40px;
+			line-height: 34px;
+			width: 88%;
+			border-radius: 4px;
+			border:1px solid silver;
+		}
+		.footer-link-div.subscribe>form>input:nth-child(2) {
+			margin-bottom: 8.46px;
+		}
+		.footer-link-div.subscribe>form>p>a:hover {
+			color: #262626;
+		}
+		.footer-link-div.subscribe>form>button {
+			height: 53px;
+			border-radius: 50px;
+			border:1px solid #4AB1F3;
+			background: #4AB1F3;
+			cursor: pointer;
+			outline: none;
+			color: white;
+			width:78%;
+			margin-top: 4px;
+			transition: all 0.212s ease-in;
+			font-weight: bold;
+			font-size: 1.061em;
+		}
+		.footer-link-div.subscribe>form>button:hover {
+			box-shadow: inset 0 0 5px -2px #0AF804, inset 0 0 11px 0px #233E66;
+			text-shadow: 0 0 15px black;
+			border: 1px solid #3DE239;
+		}
+		.footer-link-div.subscribe>form>button:active, .footer-link-div.subscribe>form>button:focus {
+			box-shadow: inset 0 0 10px -3px #6A457F;
+			border: 2px solid #2996FC;
+		}
+		.footer-link-div>ul>li>a {
+			color: #989797;
+		}
+		.copyrights {
+			height:100px;
+			width: 87%;
+			margin:0 0 0 auto;
+			margin-bottom: 26px; 
+		}
+		.bottom-footer-links {
+			float: left;
+		}
+		.bottom-footer-links>a {
+			margin-right: 19.5px;
+			font-weight: bold;
+			color: #3C6AAF;
+			transition: all 0.216s ease-out;
+		}
+		.bottom-footer-links>a:hover {
+			text-shadow: 0px 0px 1px black, 0px 0px 3px black, 0px 0px 5px black;
+			color: white;
+		}
+		.bottom-footer-soc {
+			float: right;
+		}
+		.bottom-footer-lang {
+			clear: both;
+			text-align: right;
+		}
+		.bottom-footer-lang>select {
+			border-radius: 3.5px;
+			padding: 16px 10px;
+			cursor: pointer;
+			outline: none;
+			margin-left: 13px;
+		}
+		@keyframes cookies-disappear {
+			from {
+				transform:translateY(0);
+				opacity: 1;
+			}
+			to {
+				transform:translateY(-100px);
+				opacity: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="cookies">
+		<p class="cookies-p">We use cookies to improve your experience on our website.You can update your settings here.</p>
+		<button class="remove-cookies-div"><img src="imgs/exit-cookies.png" alt=""></button>
+	</div>
+	<div class="container">
+		<header>
+			<div class="header-item a search"><a href="" class="search-item"><img src="imgs\search.png" alt=""><span>Search Our Site</span></a></div>
+			<div class="header-item logo"><img src="imgs\logo.png" alt=""></div>
+			<div class="header-item a link father-menu-destinations-pop">
+				<a href="">Destinations</a>
+				<div class="menu-destinations-pop">
+					<ul>
+						<li>
+							<div></div>
+						</li>
+						<li class="destinations-link"><a href="">Africa</a></li>
+						<li class="destinations-link"><a href="">Antarctica</a></li>
+						<li class="destinations-link"><a href="">Asia</a></li>
+						<li class="destinations-link"><a href="">Caribbean Islands</a></li>
+						<li class="destinations-link"><a href="">Central America</a></li>
+						<li class="destinations-link"><a href="">Europe</a></li>
+						<li class="destinations-link"><a href="">Middle East</a></li>
+						<li class="destinations-link"><a href="">North America</a></li>
+						<li class="destinations-link"><a href="">Pacific</a></li>
+						<li class="destinations-link"><a href="">South America</a></li>
+						<li class="destinations-last-link"><a href="">SEE ALL COUNTRIES</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="header-item a link"><a href="">Videos</a></div>
+			<div class="header-item a link"><a href="">Bookings</a></div>
+			<div class="header-item a link"><a href="">Shop</a></div>
+			<div class="header-item link">
+				<a href="" class="signin">Sign In</a>
+			</div>
+		</header>
+		<div class="body">
+			<div class="breadcrumbs">
+				<ul class="breadcrumb-list">
+					<li><a href="">First pos'</a></li>
+					<li><a href="">Second pos'</a></li>
+					<li><a href="">Current pos'</a></li>
+				</ul>
+				<div></div>
+			</div>
+			<div class="article">
+				<div class="article-head-link"><a href="" class="article-link">In Detail</a></div>
+				<h1>History</h1>
+
+				<p class="article-p">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id tempore architecto voluptates iure, provident odit soluta repellendus fuga et, porro debitis quae quasi, aperiam omnis quaerat adipisci itaque minima quisquam facilis corrupti enim eius placeat rem, nobis! Cumque molestias porro aut iure laboriosam ut ipsa voluptate id. Modi molestias impedit earum facilis, aut ipsam nisi error eaque suscipit totam, eum excepturi repellendus delectus laboriosam est, dolorem sequi fuga, explicabo doloremque minima doloribus. Voluptatibus, voluptatem iure. Omnis, reprehenderit. Numquam, perferendis? Dolorem, eum impedit voluptates esse aspernatur quo minima enim natus. Provident et ad delectus reprehenderit, deleniti facilis veniam aliquid neque quam veritatis ex maiores quo optio maxime voluptatem odit quae fugiat, deserunt unde. Praesentium autem saepe nam, similique maiores quos amet architecto id corporis accusantium minima beatae vero rem repudiandae in ullam dignissimos fugiat nesciunt assumenda velit possimus! Ab accusamus repellendus quod voluptas veniam laudantium illo iusto aperiam officiis, veritatis blanditiis laborum cumque, provident doloribus, placeat nobis consequatur optio et assumenda. Assumenda corporis soluta tempora quisquam vitae unde eius distinctio, quis explicabo a, nesciunt rerum quia odio molestiae provident. Aperiam assumenda est libero ipsa delectus, suscipit laboriosam maiores deserunt consequuntur, id nobis a inventore rerum dolore sed. Vero vel nisi quisquam hic, tenetur maiores. Quam, magni provident nihil, illum expedita quas qui ex asperiores adipisci harum exercitationem mollitia a repellat eius. Molestiae vero iusto voluptate minima obcaecati recusandae, numquam provident aliquam, tempora odio quidem saepe. Error ab dicta blanditiis totam pariatur tenetur, molestias dolorem repellendus dolor quod. Iusto dolorum, rerum velit quam enim consequatur illo, nisi repellat facere consectetur ex id dolores illum perspiciatis praesentium numquam tempora iste in a quia obcaecati voluptatum commodi? Praesentium explicabo, aliquam debitis iusto. Placeat explicabo cum delectus et voluptatum veritatis sed autem, harum quo ratione nobis iste itaque accusamus sapiente, totam ipsam. Odit voluptas quae officia cupiditate incidunt placeat repudiandae similique, quidem. Quos excepturi nobis dolor error eius, mollitia illum rem recusandae tenetur ut. Facere harum quasi asperiores ab dignissimos eligendi, tenetur natus commodi fugiat maxime libero a non tempore dolorem illo? Ex blanditiis atque, fugiat cupiditate vero voluptate, odio voluptatum et nisi nesciunt hic, eum commodi! Officia commodi nisi quaerat ratione, quam at voluptatum rem aliquam debitis perspiciatis nam ab hic, cum sequi non blanditiis voluptas doloremque tenetur sint eligendi accusamus iure tempore repudiandae magnam. Deserunt, sit, odit, ea animi velit minus maiores odio, quam quas alias ab nesciunt ipsa praesentium voluptates optio. Ipsa, cupiditate cumque praesentium architecto adipisci repellendus, placeat excepturi facilis voluptates necessitatibus quam tempore, ab voluptatibus maiores earum nulla accusamus veritatis nemo eum eveniet! Autem, eaque, consequuntur? Doloremque, repellendus! Aut atque, commodi architecto amet rem facere laboriosam ea, unde praesentium hic ad dicta repellat quae in impedit omnis facilis at quos consequuntur sequi ab eius quo! Libero numquam odit in officia, eveniet exercitationem nam ratione illum, dolores expedita quasi, excepturi rem dolore temporibus consectetur deleniti tempore! Sequi officia eos rerum earum, consequuntur, voluptatum temporibus vel dolor, iure, enim debitis. Accusantium fugit ipsum nam modi, amet est id sunt debitis, molestias in quis sint totam libero minima voluptatibus quos beatae, culpa maxime? Nihil doloribus, modi laboriosam cupiditate laborum veniam voluptas quibusdam dolor soluta praesentium quas, cum minus iure. Ut optio distinctio, voluptatem aspernatur vitae quisquam totam nemo maiores aliquid mollitia at soluta, minus molestias dignissimos! Dolor eligendi possimus necessitatibus architecto, ipsa aliquam ducimus deleniti esse quis laboriosam ullam omnis, porro quos odit saepe debitis. Veniam excepturi ut molestiae placeat esse, a delectus dolores aspernatur temporibus quos, provident odit beatae non optio! Ut est dolores voluptatibus incidunt quod, accusamus nulla nemo dolor deleniti, expedita repellat possimus asperiores fugit dolorem sed sunt placeat assumenda aperiam illo eum quaerat odio. Perspiciatis delectus ad quod neque sapiente dolore rem quaerat odit accusantium suscipit eligendi sint, aliquid eum soluta, ullam, voluptatibus expedita sunt incidunt eius ab est ut. Soluta ad illum, alias! Error explicabo excepturi reiciendis, beatae repellendus doloribus cum corporis quis perferendis, cumque fuga, similique placeat nesciunt ad ex vitae! Ea expedita fugit facilis, earum harum corporis sit labore dolorum aliquid temporibus non culpa repellendus aut eius itaque excepturi necessitatibus rem qui enim amet sed, praesentium. Consectetur recusandae, iure vero magnam ipsum dicta expedita quos voluptatibus autem maxime esse repellat facere rem nesciunt amet eius, fugit neque at aperiam molestiae consequuntur culpa fugiat quas. Sit nulla cum esse fugit est dolores enim, autem repellat itaque quae maiores aperiam beatae minima impedit, ad, laudantium! Vel qui, ipsum? Repellendus soluta perspiciatis sint tempore minima molestiae deleniti alias placeat. Et perspiciatis in deleniti atque doloremque numquam fugit harum nemo animi odit obcaecati inventore, amet magnam consequatur repellendus vero quaerat delectus accusantium nisi earum consectetur quibusdam. Quisquam porro nemo odio eligendi temporibus, sit recusandae odit. Neque earum quidem eveniet! Repellendus molestias fuga libero cupiditate adipisci delectus quaerat ducimus ullam. Enim magnam dolorum assumenda tempore voluptatibus ea dolorem obcaecati dicta! Explicabo reprehenderit velit ducimus obcaecati error facere sequi facilis nesciunt neque eaque perspiciatis itaque, dolor, autem ex atque. Vero nobis distinctio at nihil alias veritatis reiciendis aspernatur nesciunt nulla, molestias sed atque excepturi quae quisquam animi perferendis quasi accusantium recusandae provident repudiandae debitis fuga. Porro, ratione iste soluta? Cumque similique rem tempore, sapiente molestias laudantium obcaecati quod. Neque dolore, voluptates, delectus quo perspiciatis ratione dignissimos cum aspernatur nihil, quia totam illum quis? Voluptatum molestias corporis illum dolores, iusto laudantium voluptates sunt doloribus. Dolorem enim doloribus obcaecati non, fugit velit aperiam incidunt quidem, ipsum. Incidunt quod natus consequatur blanditiis? Praesentium quaerat necessitatibus consequatur recusandae voluptates ab, quos ipsum repellendus quo veniam laboriosam commodi culpa magnam sit, reiciendis totam vitae illo maxime placeat amet eaque excepturi debitis? Quod exercitationem tempora ipsam nemo, optio, error, incidunt earum, blanditiis corrupti sequi quia quidem ducimus tenetur perspiciatis vitae eveniet. Omnis labore, ipsum perferendis velit ducimus accusantium earum veniam. Autem placeat nihil, deleniti hic dolor modi animi magnam consequuntur, similique rerum. Eos illo iste explicabo sequi eaque inventore quaerat distinctio corporis. Maxime quam, veritatis, quisquam cupiditate autem explicabo at qui modi facilis, praesentium officiis ipsa! Repellendus earum quasi ad sapiente. Tempora perspiciatis, numquam fuga facilis iure doloribus?</p>
+				<button class="expand-p-button"><img src="imgs/expand-p.png" alt=""></button>
+			</div>
+
+		</div>
+
+		<footer>
+			<div class="footer-link-divs">
+				<div class="footer-link-div">
+					<h4>DESTINATIONS</h4>
+					<ul>
+						<li><a href="">Africa</a></li>
+						<li><a href="">Antarctica</a></li>
+						<li><a href="">Asia</a></li>
+						<li><a href="">Caribbean Islands</a></li>
+						<li><a href="">Central America</a></li>
+						<li><a href="">Europe</a></li>
+						<li><a href="">Middle East</a></li>
+						<li><a href="">North America</a></li>
+						<li><a href="">Pacific</a></li>
+						<li><a href="">South America</a></li>
+					</ul>
+				</div>
+				<div class="footer-link-div">
+					<h4>SHOP</h4>
+					<ul>
+						<li>
+						<li><a href="">Destination guides</a></li>
+						<li><a href="">eBooks</a></li></li>
+						<li><a href="">Pictorial & Gifts</a></li>
+						<li><a href="">Phrasebooks</a></li>
+						<li><a href="">Lonely Planet Kids</a></li>
+						<li><a href="">special offers</a></li>
+					</ul>
+				</div>
+				<div class="footer-link-div">
+					<h4>COMMUNITY</h4>
+					<ul>
+						<li><a href="">Country forums</a></li>
+						<li><a href="">Interest forums</a></li>
+						<li><a href="">Travel companions</a></li>
+						<li><a href="">Talk to Lonely Planet</a></li>
+					</ul>
+				</div>
+				<div class="footer-link-div">
+					<h4>INTERESTS</h4>
+					<ul>
+						<li><a href="">Adventure travel</a></li>
+						<li><a href="">Art and culture</a></li>
+						<li><a href="">Backpacking</a></li>
+						<li><a href="">Beaches, coasts and islands</a></li>
+						<li><a href="">Family holidays</a></li>
+						<li><a href="">Festival</a></li>
+						<li><a href="">Food and drink</a></li>
+						<li><a href="">Honeymoon and romance</a></li>
+						<li><a href="">Road trips</a></li>
+						<li><a href="">Travel gear and tech</a></li>
+						<li><a href="">Travel on a budget</a></li>
+						<li><a href="">Wildlife and nature</a></li>
+					</ul>
+				</div>
+				<div class="footer-link-div">
+					<h4>TRAVEL BOOKING</h4>
+					<ul>
+						<li><a href="">Hotels</a></li>
+						<li><a href="">Flights</a></li>
+						<li><a href="">Insurance</a></li>
+					</ul>
+				</div>
+				<div class="footer-link-div subscribe">
+					<h4>SUBSCRIBE</h4>
+					<form action="">
+						<label>Get 20% off at our online shop.</label>
+						<input type="text">
+						<input type="text">
+						<p class="terms">
+							I want emails from Lonely Planet with travel and product information, promotions, advertisements, third-party offers, and surveys. I can unsubscribe any time using the unsubscribe link at the end of all emails. Contact Lonely Planet <a href="">here</a>. Lonely Planet <a href="">Privacy Policy</a>.
+						</p>
+						<button>Subscribe</button>
+					</form>
+				</div>
+			
+			</div>
+			<div class="copyrights">
+				<div class="bottom-footer-links">
+					<a href="">About Us</a>
+					<a href="">WorkFor us</a>
+					<a href="">Contact us</a>
+					<a href="">Press</a>
+					<a href="">Blog</a>
+					<a href="">Terms & conditions</a>
+					<a href="">Privacy policy</a>
+				</div>
+				<div class="bottom-footer-soc">
+					<a href=""><img src="" alt=""></a>
+					<a href=""><img src="" alt=""></a>
+					<a href=""><img src="" alt=""></a>
+					<a href=""><img src="" alt=""></a>
+				</div>
+				<div class="bottom-footer-lang">
+					<span>Choose language</span>
+					<select name="languages" id="">
+						<option value="">English</option>
+						<option value="">French</option>
+						<option value="">Spanish</option>
+						<option value="">Russian</option>
+					</select>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script>
+		$('.remove-cookies-div').on('click', function() {
+			$('.cookies').addClass("cookies-animation");
+		})
+		$(".cookies").on('animationend', function() { 
+		   $('.cookies').addClass("cookies-gone");
+		});
+		$('.expand-p-button').click( function(){
+			$('.article-p').addClass("article-p-expanded");
+			$(".expand-p-button").addClass("expand-button-gone");
+		})
+	</script>
+</body>
+</html>
